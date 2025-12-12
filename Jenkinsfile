@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh '''
                     
-		    cd ./security_task/
+		    cd /var/jenkins_home/workspace/pipe1/
                     /sonar-scanner-8.0.1.6346-linux-x64/bin/./sonar-scanner \
   -Dsonar.projectKey=pipeline \
   -Dsonar.sources=. \
