@@ -1,15 +1,28 @@
 pipeline {
     agent any
-    stages {
-        stage('DEMO STAGE') {
+
+   stages {
+        stage('Clone Repo'){
+            steps{
+                git branch: 'main', url: 'https://github.com/sinhakiara/security_task'
+            }
+        }
+
+        stage('Scan the repo with Sonar') {
             steps {
-                script {
-                    sh 'echo "My DEMO PIPELINE is working fine."'
-                    sh 'echo "Creating a file to test..."'
-                    sh 'touch ./pipeline_build_working_demo'
-                    sh 'echo "Successfully created"'
-                }
+                sh '''
+                    pip install pysonar || true
+		    cd ./security_task/
+                    pysonar --sonar-host-url=https://name-sao-comments-advertisement.trycloudflare.com --sonar-token=sqp_2860ce45c93de666fdab8763143ce120cd76693e --sonar-project-key=pipeline
+                '''
+            }
+        }
+        stage('test1') {
+            steps {
+                sh '''
+                    echo "Sonar scan done"
+                '''
             }
         }
     }
-} 
+}
