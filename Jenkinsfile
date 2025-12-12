@@ -11,9 +11,13 @@ pipeline {
         stage('Scan the repo with Sonar') {
             steps {
                 sh '''
-                    pip install pysonar || true
+                    
 		    cd ./security_task/
-                    pysonar --sonar-host-url=https://name-sao-comments-advertisement.trycloudflare.com --sonar-token=sqp_2860ce45c93de666fdab8763143ce120cd76693e --sonar-project-key=pipeline
+                    /sonar-scanner-8.0.1.6346-linux-x64/bin/./sonar-scanner \
+  -Dsonar.projectKey=pipeline \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=https://name-sao-comments-advertisement.trycloudflare.com \
+  -Dsonar.token=sqp_2860ce45c93de666fdab8763143ce120cd76693e
                 '''
             }
         }
